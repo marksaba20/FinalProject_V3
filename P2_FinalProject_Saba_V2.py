@@ -48,10 +48,42 @@ cm_df = pd.DataFrame(cm,
                      columns=['Predicted: Non-User', 'Predicted: User'])
 
 
+
+income_map = {
+    1: "Less than $10,000",
+    2: "10 to under $20,000",
+    3: "20 to under $30,000",
+    4: "30 to under $40,000",
+    5: "40 to under $50,000",
+    6: "50 to under $75,000",
+    7: "75 to under $100,000",
+    8: "100 to under $150,000",
+    9: "$150,000 or more"
+}
+
+education_map = {
+    1: "Less than high school (Grades 1-8 or no formal schooling)",
+    2: "High school incomplete (Grades 9-11 or Grade 12 with NO diploma)",
+    3: "High school graduate (Grade 12 with diploma or GED certificate)",
+    4: "Some college, no degree (includes some community college)",
+    5: "Two-year associate degree from a college or university",
+    6: "Four-year college or university degree/Bachelor’s degree (e.g., BS, BA, AB)",
+    7: "Some postgraduate or professional schooling, no postgraduate degree (e.g. some graduate school)",
+    8: "Postgraduate or professional degree, including master’s, doctorate, medical or law degree (e.g., MA, MS, PhD, MD, JD)"
+}
+
 st.header("Predict LinkedIn Usage")
+
 age = st.number_input("Enter your age", min_value=18, max_value=98, value=30)
-income = st.selectbox("Select your income range", [1, 2, 3, 4, 5, 6, 7, 8, 9])
-educ2 = st.selectbox("Select your education level", [1, 2, 3, 4, 5, 6, 7, 8])
+
+income = st.selectbox("Select your income range", 
+                      options=list(income_map.keys()), 
+                      format_func=lambda x: income_map[x])
+
+educ2 = st.selectbox("Select your education level", 
+                     options=list(education_map.keys()), 
+                     format_func=lambda x: education_map[x])
+
 marital = st.radio("Are you married?", ("Yes", "No"))
 parent = st.radio("Are you a parent?", ("Yes", "No"))
 gender = st.radio("Gender", ("Female", "Male"))
@@ -74,3 +106,4 @@ else:
     st.write("You are classified as a non-LinkedIn user.")
 
 st.write(f"Probability of using LinkedIn: {probability[0]:.4f}")
+
