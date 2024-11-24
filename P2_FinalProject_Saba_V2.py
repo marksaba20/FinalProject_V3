@@ -72,7 +72,7 @@ education_map = {
     8: "Postgraduate or professional degree, including master’s, doctorate, medical or law degree (e.g., MA, MS, PhD, MD, JD)"
 }
 
-st.header("Predict LinkedIn Usage")
+st.header("Mark's Handy Dandy LinkedIn Usage Identifier")
 
 age = st.number_input("Enter your age", min_value=18, max_value=98, value=30)
 
@@ -101,7 +101,7 @@ prediction = model.predict(user_input)
 probability = model.predict_proba(user_input)[:, 1]
 
 if prediction[0] == 1:
-    st.write("You are classified as a LinkedIn user!")
+    st.write("You are classified as a LinkedIn user.")
 else:
     st.write("You are classified as a non-LinkedIn user.")
 
